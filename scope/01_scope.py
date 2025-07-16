@@ -16,3 +16,6 @@ def f1():
         print(x)
     f2()
 print(x)
+
+x =  100
+ 
