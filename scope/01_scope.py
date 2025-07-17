@@ -8,14 +8,24 @@
 # print(result)
 
 
-x = 99
+# x = 99
 
-def f1():
-    x = 88
-    def f2():
-        print(x)
-    f2()
-print(x)
+# def f1():
+#     x = 88
+#     def f2():
+#         print(x)
+#     f2()
+# f1()
 
-x =  100
- 
+def chaipani(num):
+    def actual(x):
+        return x ** num
+    return actual
+
+
+
+f = chaipani(2)
+g = chaipani(3)
+
+print(f(3))
+print(g(3))
