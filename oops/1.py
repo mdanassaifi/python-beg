@@ -3,6 +3,9 @@ class car:
         self.brand = brand
         self.model = model
 
+    def get_brand(self):
+        return self.brand + " !"
+
 
     def  full_name(self):
         return f"{self.brand} {self.model}"
@@ -13,7 +16,9 @@ class ElectricCar(car):
         self.battery_size = battery_size
 
 my_tesla = ElectricCar("tesla", "model s", "85 kWh")
-print(my_tesla.full_name())
+print(my_tesla.brand)
+print(my_tesla.get_brand())
+
 
 # my_car = car("suzuki", "shift")
 # print(my_car.brand)
