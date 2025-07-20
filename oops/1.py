@@ -15,6 +15,10 @@ class car:
     
     def fuel_type(self):
         return "petrol or diesel"
+    
+    @staticmethod
+    def general_description():
+        return "This is a car class that represents different types of cars."
 
 
 class ElectricCar(car):
@@ -37,6 +41,7 @@ safarithree = car("tata", "nexon")
 print(safari.fuel_type())
 print(safari.total_car)
 
+print(car.general_description())
 # my_car = car("suzuki", "shift")
 # print(my_car.brand)
 # print(my_car.model)
