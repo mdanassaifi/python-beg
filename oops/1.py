@@ -29,11 +29,11 @@ class ElectricCar(car):
     def fuel_type(self):
         return "Electric Charge"
 
-# my_tesla = ElectricCar("tesla", "model s", "85 kWh")
+my_tesla = ElectricCar("tesla", "model s", "85 kWh")
 # print(my_tesla.__brand)
 # print(my_tesla.get_brand())
 
-# print(my_tesla.fuel_type())
+print(my_tesla.fuel_type())
 
 
 safari = car("tata", "safari")
@@ -48,17 +48,17 @@ print(car.general_description())
 # print(my_car.full_name())
 
 
-class Battery:
-    def battery_info(self):
-        return "Battery is a device that stores energy"
+# class Battery:
+#     def battery_info(self):
+#         return "Battery is a device that stores energy"
 
-class engine:
-    def engine_info(self):
-        return "Engine is a machine that converts energy into mechanical power"
+# class engine:
+#     def engine_info(self):
+#         return "Engine is a machine that converts energy into mechanical power"
 
-class elerctriccarTwo(Battery, engine, car):
-    pass
+# class elerctriccarTwo(Battery, engine, car):
+#     pass
 
-my_new_tesla = elerctriccarTwo("tesla", "model ww", "85 kWh")
-print(my_new_tesla.battery_info())
-print(my_new_tesla.engine_info())
+# my_new_tesla = elerctriccarTwo("tesla", "model ww", "85 kWh")
+# print(my_new_tesla.battery_info())
+# print(my_new_tesla.engine_info())
