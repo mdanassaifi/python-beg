@@ -7,10 +7,6 @@ def debug(func):
     
     return wrapper
 
-
-
-
-
 @debug
 def greet(name, greeting="Hello"):
     print(f"{greeting}, {name}!")
