@@ -8,3 +8,10 @@ def timer(func):
         print(f"{func.__name__} ran in {end - start} time")
         return result
     return wrapper
+
+@timer
+def example_func(n):
+    time.sleep(n)
+
+example_func(2)
+
