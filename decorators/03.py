@@ -1,5 +1,13 @@
 import time
 
+def cache(func):
+    cache_value = {}
+    def wrapper(*args):
+        result = func(*args)
+        return result
+    return wrapper
+
+
 
 
 
