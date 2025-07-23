@@ -1,4 +1,6 @@
 
+def load_data():
+    pass
 
 def list_all_videos(videos):
     pass
@@ -14,7 +16,7 @@ def delete_video(videos):
 
 
 def main():
-    videos = []
+    videos = load_data
     while True:
         print("\n YouTube Manager  | choose an option")
         print("1. List all youtube videos")
