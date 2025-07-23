@@ -1,6 +1,12 @@
+import json
+
 
 def load_data():
-    pass
+    try:
+        with open('youtube.txt', 'r') as file:
+            return json.load(file)
+    except:
+        pass
 
 def list_all_videos(videos):
     pass
