@@ -14,6 +14,12 @@ CREATE TABLE IF NOT EXISTS videos (
                time TEXT NOT NULL,
     )
 ''')
+def list_videos():
+    pass
+def add_video():
+    pass
+def update_video():
+    pass
 
 def main():
     while True:
