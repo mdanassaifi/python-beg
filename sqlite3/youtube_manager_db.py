@@ -20,6 +20,8 @@ def add_video():
     pass
 def update_video():
     pass
+def delete_video():
+    pass
 
 def main():
     while True:
@@ -42,6 +44,13 @@ def main():
             name = input("Enter new video name: ")
             time = input("Enter new video time: ")
             update_video(video_id,name, time)
+        elif choice == '4':
+            video_id = input("Enter video ID to delete: ")
+            delete_video(video_id)
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice")
 
 if __name__ == "__main__":
     main()
