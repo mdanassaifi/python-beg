@@ -52,5 +52,7 @@ def main():
         else:
             print("Invalid choice")
 
+    conn.close()
+
 if __name__ == "__main__":
     main()
