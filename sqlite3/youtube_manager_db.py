@@ -16,7 +16,13 @@ CREATE TABLE IF NOT EXISTS videos (
 ''')
 
 def main():
-    pass
+    while True:
+        print("\n Youtube manager app with DB")
+        print("1. List videos")
+        print("2. Add a video")
+        print("3. Update a video")
+        print("4. Delete a video")
+        print("5. Exit")
 
 if __name__ == "__main__":
     main()
