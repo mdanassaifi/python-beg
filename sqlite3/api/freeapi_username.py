@@ -13,3 +13,9 @@ def fetch_random_user_freeapi():
         return username, country
     else:
         raise Exception("Failed to fetch user data from FreeAPI")
+    
+    def main():
+        pass
+
+    if __name__ == "__main__":
+        main()
