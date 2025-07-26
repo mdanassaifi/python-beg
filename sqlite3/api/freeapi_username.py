@@ -15,7 +15,11 @@ def fetch_random_user_freeapi():
         raise Exception("Failed to fetch user data from FreeAPI")
     
     def main():
-        pass
+        try:
+            username, country = fetch_random_user_freeapi()
+            print(f"Username: {username} \n country: {country}")
+        except Exception as e:
+            print(str(e))
 
     if __name__ == "__main__":
         main()
