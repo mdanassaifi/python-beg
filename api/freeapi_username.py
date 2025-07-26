@@ -10,14 +10,15 @@ def fetch_random_user_freeapi():
         user_data = data["data"]
         username = user_data["login"]["username"]
         country = user_data["location"]["country"]
-        return username, country
+        password = user_data["login"]["password"]
+        return username, country, password
     else:
         raise Exception("Failed to fetch user data from FreeAPI")
     
 def main():
     try:
-        username, country = fetch_random_user_freeapi()
-        print(f"username: {username} \ncountry: {country}")
+        username, country, password = fetch_random_user_freeapi()
+        print(f"username: {username} \ncountry: {country} \npassword: {password}")
     except Exception as e:
         print(str(e))
 
