@@ -14,7 +14,7 @@ def fetch_joke_chuck_norris_style():
 def main():
     try:
         joke = fetch_joke_chuck_norris_style()
-        print(f"joke👉 : {joke}")
+        print(f"\njoke👉 : {joke}")
     except Exception as e:
         print("Error:", str(e))
 
