@@ -18,7 +18,7 @@ def fetch_random_product():
 def main():
     try:
         brand, category, description = fetch_random_product()
-        print(f"brand: {brand} \ncategory: {category} \ndescription: {description}")
+        print(f"\nbrand: {brand} \ncategory: {category} \ndescription: {description}")
     except Exception as e:
         print(str(e))
 
