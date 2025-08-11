@@ -42,3 +42,8 @@
 # percentage = (obtained_marks / total_marks) * 100
 # print("Percentage: ", percentage)
 
+# search song
+print("Welcome to the song search")
+print("Please enter the song name")
+song_name = input("Song name: ")
+print("Searching for song: ", song_name)
