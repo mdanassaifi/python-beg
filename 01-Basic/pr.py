@@ -34,3 +34,5 @@
 # print("Thank you for using the calculator!")
 
 # percentage calculator 
+
+print("Welcome to the calculator")
