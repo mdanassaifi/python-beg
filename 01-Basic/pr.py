@@ -1,44 +1,44 @@
-# # simple calculator
+# # # simple calculator
 
-# print("Welcome to the calculator")
-# print("Please enter your choice")
-# print("1. Addition")
-# print("2. Subtraction")
-# print("3. Multiplication")
-# print("4. Division")
-# choice = int(input("Enter your choice: "))
+# # print("Welcome to the calculator")
+# # print("Please enter your choice")
+# # print("1. Addition")
+# # print("2. Subtraction")
+# # print("3. Multiplication")
+# # print("4. Division")
+# # choice = int(input("Enter your choice: "))
 
-# if choice == 1:
-#     print("Enter two numbers")
-#     num1 = int(input("Enter first number: "))
-#     num2 = int(input("Enter second number: "))
-#     print(num1 + num2)
-# elif choice == 2:
-#     print("Enter two numbers")
-#     num1 = int(input("Enter first number: "))
-#     num2 = int(input("Enter second number: "))
-#     print(num1 - num2)
-# elif choice == 3:
-#     print("Enter two numbers")
-#     num1 = int(input("Enter first number: "))
-#     num2 = int(input("Enter second number: "))
-#     print(num1 * num2)
-# elif choice == 4:
-#     print("Enter two numbers")
-#     num1 = int(input("Enter first number: "))
-#     num2 = int(input("Enter second number: "))
-#     print(num1 / num2)
-# else:
-#     print("Invalid choice, please try again")
+# # if choice == 1:
+# #     print("Enter two numbers")
+# #     num1 = int(input("Enter first number: "))
+# #     num2 = int(input("Enter second number: "))
+# #     print(num1 + num2)
+# # elif choice == 2:
+# #     print("Enter two numbers")
+# #     num1 = int(input("Enter first number: "))
+# #     num2 = int(input("Enter second number: "))
+# #     print(num1 - num2)
+# # elif choice == 3:
+# #     print("Enter two numbers")
+# #     num1 = int(input("Enter first number: "))
+# #     num2 = int(input("Enter second number: "))
+# #     print(num1 * num2)
+# # elif choice == 4:
+# #     print("Enter two numbers")
+# #     num1 = int(input("Enter first number: "))
+# #     num2 = int(input("Enter second number: "))
+# #     print(num1 / num2)
+# # else:
+# #     print("Invalid choice, please try again")
 
-# print("Thank you for using the calculator!")
+# # print("Thank you for using the calculator!")
 
-# percentage calculator
-print("Welcome to the percentage calculator")
-print("Please enter the total marks")
-total_marks = int(input("Total marks: "))
-print("Please enter the obtained marks")
-obtained_marks = int(input("Obtained marks: "))
-percentage = (obtained_marks / total_marks) * 100
-print("Percentage: ", percentage)
+# # percentage calculator
+# print("Welcome to the percentage calculator")
+# print("Please enter the total marks")
+# total_marks = int(input("Total marks: "))
+# print("Please enter the obtained marks")
+# obtained_marks = int(input("Obtained marks: "))
+# percentage = (obtained_marks / total_marks) * 100
+# print("Percentage: ", percentage)
 
