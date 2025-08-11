@@ -36,3 +36,16 @@
 # percentage calculator 
 
 print("Welcome to the calculator")
+print("Please enter your choice")
+print("1. Percentage")
+choice = int(input("Enter your choice: "))
+
+if choice == 1:
+    print("Enter the total marks")
+    total_marks = int(input("Total marks: "))
+    print("Enter the obtained marks")
+    obtained_marks = int(input("Obtained marks: "))
+    percentage = (obtained_marks / total_marks) * 100
+    print("Percentage: ", percentage)
+else:
+    print("Invalid choice, please try again")
