@@ -33,6 +33,12 @@
 
 # print("Thank you for using the calculator!")
 
-# percentage calculator 
-
+# percentage calculator
+print("Welcome to the percentage calculator")
+print("Please enter the total marks")
+total_marks = int(input("Total marks: "))
+print("Please enter the obtained marks")
+obtained_marks = int(input("Obtained marks: "))
+percentage = (obtained_marks / total_marks) * 100
+print("Percentage: ", percentage)
 
