@@ -1,4 +1,4 @@
-# Officer aur Case Management System (with Auto ID)
+# Officer aur Case Management System (Auto Assign by Officer ID)
 
 officers = []   # list to store officers
 cases = []      # list to store cases
@@ -10,18 +10,51 @@ def add_officer():
     global officer_id_counter
     name = input("Enter Officer Name: ")
     department = input("Enter Department: ")
-    officer = {"ID": officer_id_counter, "Name": name, "Department": department}
+    officer = {"ID": officer_id_counter, "Name": name, "Department": department, "Cases": []}
     officers.append(officer)
     print(f"✅ Officer added successfully with ID: {officer_id_counter}\n")
     officer_id_counter += 1
 
 def add_case():
     global case_id_counter
+
+    if not officers:
+        print("⚠️ No officers available. Please add officer first!\n")
+        return
+
     case_name = input("Enter Case Name: ")
-    assigned_officer = input("Enter Assigned Officer ID: ")
-    case = {"Case ID": case_id_counter, "Case Name": case_name, "Assigned Officer": assigned_officer}
+    officer_id = int(input("Enter Officer ID to assign case: "))
+
+    # check officer exist
+    assigned_officer = None
+    for o in officers:
+        if o["ID"] == officer_id:
+            assigned_officer = o
+            break
+
+    if assigned_officer is None:
+        print("❌ Officer ID not found! Please try again.\n")
+        return
+
+    mujrim_name = input("Enter Mujrim Name: ")
+    mujrim_age = input("Enter Mujrim Age: ")
+    saza = input("Enter Saza (in years): ")
+
+    case = {
+        "Case ID": case_id_counter,
+        "Case Name": case_name,
+        "Officer ID": officer_id,
+        "Officer Name": assigned_officer["Name"],
+        "Mujrim Name": mujrim_name,
+        "Mujrim Age": mujrim_age,
+        "Saza": saza
+    }
     cases.append(case)
-    print(f"✅ Case added successfully with ID: {case_id_counter}\n")
+
+    # also add case to officer's personal list
+    assigned_officer["Cases"].append(case)
+
+    print(f"✅ Case added successfully with ID: {case_id_counter} and assigned to Officer {assigned_officer['Name']}\n")
     case_id_counter += 1
 
 def view_officers():
@@ -30,7 +63,7 @@ def view_officers():
     else:
         print("\n--- Officers List ---")
         for o in officers:
-            print(f"ID: {o['ID']}, Name: {o['Name']}, Department: {o['Department']}")
+            print(f"ID: {o['ID']}, Name: {o['Name']}, Department: {o['Department']}, Total Cases: {len(o['Cases'])}")
         print()
 
 def view_cases():
@@ -39,8 +72,10 @@ def view_cases():
     else:
         print("\n--- Cases List ---")
         for c in cases:
-            print(f"Case ID: {c['Case ID']}, Name: {c['Case Name']}, Assigned Officer ID: {c['Assigned Officer']}")
-        print()
+            print(f"Case ID: {c['Case ID']}, Case Name: {c['Case Name']}")
+            print(f"Officer: {c['Officer Name']} (ID: {c['Officer ID']})")
+            print(f"Mujrim: {c['Mujrim Name']} (Age: {c['Mujrim Age']})")
+            print(f"Saza: {c['Saza']} years\n")
 
 # Main menu loop
 while True:
