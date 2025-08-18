@@ -1,4 +1,4 @@
-# Officer aur Case Management System (Auto Assign by Officer ID)
+# Officer aur Case Management System (with Delete Option)
 
 officers = []   # list to store officers
 cases = []      # list to store cases
@@ -77,6 +77,57 @@ def view_cases():
             print(f"Mujrim: {c['Mujrim Name']} (Age: {c['Mujrim Age']})")
             print(f"Saza: {c['Saza']} years\n")
 
+def delete_case():
+    if not cases:
+        print("⚠️ No cases available to delete.\n")
+        return
+
+    case_id = int(input("Enter Case ID to delete: "))
+    found_case = None
+
+    for c in cases:
+        if c["Case ID"] == case_id:
+            found_case = c
+            break
+
+    if found_case:
+        # remove from cases list
+        cases.remove(found_case)
+
+        # also remove from officer's case list
+        for o in officers:
+            if o["ID"] == found_case["Officer ID"]:
+                o["Cases"] = [case for case in o["Cases"] if case["Case ID"] != case_id]
+
+        print(f"🗑️ Case ID {case_id} deleted successfully!\n")
+    else:
+        print("❌ Case not found!\n")
+
+def delete_officer():
+    if not officers:
+        print("⚠️ No officers available to delete.\n")
+        return
+
+    officer_id = int(input("Enter Officer ID to delete: "))
+    found_officer = None
+
+    for o in officers:
+        if o["ID"] == officer_id:
+            found_officer = o
+            break
+
+    if found_officer:
+        # remove officer
+        officers.remove(found_officer)
+
+        # also remove all cases linked to this officer
+        global cases
+        cases = [case for case in cases if case["Officer ID"] != officer_id]
+
+        print(f"🗑️ Officer ID {officer_id} and all their cases deleted successfully!\n")
+    else:
+        print("❌ Officer not found!\n")
+
 # Main menu loop
 while True:
     print("========= MENU =========")
@@ -84,9 +135,11 @@ while True:
     print("2. Add Case")
     print("3. View Officers")
     print("4. View Cases")
-    print("5. Exit")
+    print("5. Delete Officer")
+    print("6. Delete Case")
+    print("7. Exit")
     
-    choice = input("Enter your choice (1-5): ")
+    choice = input("Enter your choice (1-7): ")
     
     if choice == '1':
         add_officer()
@@ -97,6 +150,10 @@ while True:
     elif choice == '4':
         view_cases()
     elif choice == '5':
+        delete_officer()
+    elif choice == '6':
+        delete_case()
+    elif choice == '7':
         print("👋 Exiting program...")
         break
     else:
