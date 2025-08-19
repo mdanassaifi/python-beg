@@ -1,39 +1,46 @@
-# Officer aur Case Management System (with Delete Option)
+from pymongo import MongoClient
 
-officers = []   # list to store officers
-cases = []      # list to store cases
+# ====== MongoDB Connection ======
+# apna connection string yahan paste karo
 
-officer_id_counter = 1   # automatic officer id
-case_id_counter = 1      # automatic case id
+
+db = client["PoliceDB"]            # database
+officers_collection = db["officers"]
+cases_collection = db["cases"]
+
+officer_id_counter = 1
+case_id_counter = 1
+
+def get_next_officer_id():
+    global officer_id_counter
+    last = officers_collection.find_one(sort=[("ID", -1)])
+    if last:
+        officer_id_counter = last["ID"] + 1
+    return officer_id_counter
+
+def get_next_case_id():
+    global case_id_counter
+    last = cases_collection.find_one(sort=[("Case ID", -1)])
+    if last:
+        case_id_counter = last["Case ID"] + 1
+    return case_id_counter
 
 def add_officer():
-    global officer_id_counter
+    officer_id = get_next_officer_id()
     name = input("Enter Officer Name: ")
     department = input("Enter Department: ")
-    officer = {"ID": officer_id_counter, "Name": name, "Department": department, "Cases": []}
-    officers.append(officer)
-    print(f"✅ Officer added successfully with ID: {officer_id_counter}\n")
-    officer_id_counter += 1
+    officer = {"ID": officer_id, "Name": name, "Department": department}
+    officers_collection.insert_one(officer)
+    print(f"✅ Officer added with ID: {officer_id}\n")
 
 def add_case():
-    global case_id_counter
-
-    if not officers:
-        print("⚠️ No officers available. Please add officer first!\n")
-        return
-
+    case_id = get_next_case_id()
     case_name = input("Enter Case Name: ")
     officer_id = int(input("Enter Officer ID to assign case: "))
 
-    # check officer exist
-    assigned_officer = None
-    for o in officers:
-        if o["ID"] == officer_id:
-            assigned_officer = o
-            break
-
-    if assigned_officer is None:
-        print("❌ Officer ID not found! Please try again.\n")
+    officer = officers_collection.find_one({"ID": officer_id})
+    if not officer:
+        print("❌ Officer not found! Please add correct Officer ID.\n")
         return
 
     mujrim_name = input("Enter Mujrim Name: ")
@@ -41,32 +48,30 @@ def add_case():
     saza = input("Enter Saza (in years): ")
 
     case = {
-        "Case ID": case_id_counter,
+        "Case ID": case_id,
         "Case Name": case_name,
         "Officer ID": officer_id,
-        "Officer Name": assigned_officer["Name"],
+        "Officer Name": officer["Name"],
         "Mujrim Name": mujrim_name,
         "Mujrim Age": mujrim_age,
         "Saza": saza
     }
-    cases.append(case)
-
-    # also add case to officer's personal list
-    assigned_officer["Cases"].append(case)
-
-    print(f"✅ Case added successfully with ID: {case_id_counter} and assigned to Officer {assigned_officer['Name']}\n")
-    case_id_counter += 1
+    cases_collection.insert_one(case)
+    print(f"✅ Case added with ID: {case_id}, assigned to Officer {officer['Name']}\n")
 
 def view_officers():
+    officers = list(officers_collection.find())
     if not officers:
         print("⚠️ No officers found.\n")
     else:
         print("\n--- Officers List ---")
         for o in officers:
-            print(f"ID: {o['ID']}, Name: {o['Name']}, Department: {o['Department']}, Total Cases: {len(o['Cases'])}")
+            total_cases = cases_collection.count_documents({"Officer ID": o["ID"]})
+            print(f"ID: {o['ID']}, Name: {o['Name']}, Department: {o['Department']}, Total Cases: {total_cases}")
         print()
 
 def view_cases():
+    cases = list(cases_collection.find())
     if not cases:
         print("⚠️ No cases found.\n")
     else:
@@ -78,57 +83,24 @@ def view_cases():
             print(f"Saza: {c['Saza']} years\n")
 
 def delete_case():
-    if not cases:
-        print("⚠️ No cases available to delete.\n")
-        return
-
     case_id = int(input("Enter Case ID to delete: "))
-    found_case = None
-
-    for c in cases:
-        if c["Case ID"] == case_id:
-            found_case = c
-            break
-
-    if found_case:
-        # remove from cases list
-        cases.remove(found_case)
-
-        # also remove from officer's case list
-        for o in officers:
-            if o["ID"] == found_case["Officer ID"]:
-                o["Cases"] = [case for case in o["Cases"] if case["Case ID"] != case_id]
-
+    result = cases_collection.delete_one({"Case ID": case_id})
+    if result.deleted_count > 0:
         print(f"🗑️ Case ID {case_id} deleted successfully!\n")
     else:
         print("❌ Case not found!\n")
 
 def delete_officer():
-    if not officers:
-        print("⚠️ No officers available to delete.\n")
-        return
-
     officer_id = int(input("Enter Officer ID to delete: "))
-    found_officer = None
-
-    for o in officers:
-        if o["ID"] == officer_id:
-            found_officer = o
-            break
-
-    if found_officer:
-        # remove officer
-        officers.remove(found_officer)
-
-        # also remove all cases linked to this officer
-        global cases
-        cases = [case for case in cases if case["Officer ID"] != officer_id]
-
-        print(f"🗑️ Officer ID {officer_id} and all their cases deleted successfully!\n")
+    result = officers_collection.delete_one({"ID": officer_id})
+    if result.deleted_count > 0:
+        # remove all cases of this officer
+        cases_collection.delete_many({"Officer ID": officer_id})
+        print(f"🗑️ Officer ID {officer_id} and all their cases deleted!\n")
     else:
         print("❌ Officer not found!\n")
 
-# Main menu loop
+# ========= Main Menu =========
 while True:
     print("========= MENU =========")
     print("1. Add Officer")
